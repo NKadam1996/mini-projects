@@ -1,0 +1,48 @@
+body {
+  font-family: "Arial", sans-serif;
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+}
+
+p {
+  color: #777;
+}
+
+.grid-container {
+  display: flex;
+  grid-template-columns: repeat(20, 1fr);
+  
+}
+
+.grid-row {
+  display: grid;
+}
+
+.score-class {
+  display: flex;
+  align-content: flex-start;
+  font-size: 5rem;
+}
+
+.mole {
+  height: 200px;
+  width: 200px;
+}
+
+.timer-class {
+  display: flex;
+  align-content: flex-start;
+  font-size: 5rem;
+}
+
+.main-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  align-items: center;
+}
