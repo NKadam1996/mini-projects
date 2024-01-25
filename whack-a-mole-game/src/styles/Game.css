@@ -24,7 +24,7 @@ p {
 .score-class {
   display: flex;
   align-content: flex-start;
-  font-size: 5rem;
+  font-size: 30px;
 }
 
 .mole {
@@ -35,7 +35,7 @@ p {
 .timer-class {
   display: flex;
   align-content: flex-start;
-  font-size: 5rem;
+  font-size: 30px;
 }
 
 .main-container {
