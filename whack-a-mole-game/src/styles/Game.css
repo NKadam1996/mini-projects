@@ -14,7 +14,6 @@ p {
 .grid-container {
   display: flex;
   grid-template-columns: repeat(20, 1fr);
-  
 }
 
 .grid-row {
@@ -38,7 +37,13 @@ p {
   font-size: 30px;
 }
 
-.main-container {
+.text-container {
+  align-items: center;
+  display: absolute;
+  flex-wrap: inherit;
+}
+
+.game-container {
   position: absolute;
   top: 50%;
   left: 50%;
