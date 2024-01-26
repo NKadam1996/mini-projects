@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Mole } from "./Mole";
 import "../styles/Game.css";
+import whackSound from "../audio/whack.mp3";
+import wrongWhackSound from "../audio/wrong-whack.mp3";
 
 const config = require("../config/config.json");
 
 export const Game = () => {
   const [score, setScore] = useState(config.initialScore);
   const [moles, setMoles] = useState(generateInitialMoles());
-  const [timer, setTimer] = useState(config.gameTimer); // Set the initial timer value in seconds
+  const [timer, setTimer] = useState(config.gameTimer); // Initial timer value in seconds
   const [gameStarted, setGameStarted] = useState(false);
+  const [whackAudio] = useState(new Audio(whackSound));
+  const [wrongWhackAudio] = useState(new Audio(wrongWhackSound));
 
   function generateInitialMoles() {
     return Array.from({ length: config.gridRow }, (_, row) =>
@@ -21,15 +25,17 @@ export const Game = () => {
 
   const handleWhack = (row, col) => {
     if (moles[row][col].isVisible) {
-      setScore((prevScore) => prevScore + 1);
+      whackAudio.play();
+      setScore((prevScore) => prevScore + config.positiveScore);
       setMoles((prevMoles) => {
         const updatedMoles = [...prevMoles];
         updatedMoles[row][col].isVisible = false;
         return updatedMoles;
       });
     } else {
-      // Mole not clicked, decrement the score by 1
-      setScore((prevScore) => prevScore - 1);
+      // Mole not clicked, decrement the score
+      wrongWhackAudio.play();
+      setScore((prevScore) => prevScore - config.negativeScore);
     }
   };
 
@@ -70,6 +76,16 @@ export const Game = () => {
     }
   }, [gameStarted]);
 
+  useEffect(() => {
+    return () => {
+      whackAudio.pause();
+      whackAudio.currentTime = 0;
+      
+      wrongWhackAudio.pause();
+      wrongWhackAudio.currentTime = 0;
+    };
+  }, [whackAudio, wrongWhackAudio]);
+
   // End the game when the timer reaches 0
   useEffect(() => {
     if (timer === config.initialScore && gameStarted) {
@@ -86,8 +102,14 @@ export const Game = () => {
       <div className="game-container">
         <div className="text-container">
           <p className="score-class">Score: {score}</p>
-          {!gameStarted && <button className="button-class" onClick={startGame}>Begin Game</button>}
-          <p className="timer-class">Time Left: <br/> {timer} seconds</p>
+          {!gameStarted && (
+            <button className="button-class" onClick={startGame}>
+              Begin Game
+            </button>
+          )}
+          <p className="timer-class">
+            Time Left: <br /> {timer} seconds
+          </p>
         </div>
         <div className="grid-container">
           {moles.map((row, rowIndex) => (
