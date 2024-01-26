@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background: radial-gradient(#419c55 60%,#014e07);
+  background: radial-gradient(#419c55 60%, #014e07);
   overflow: hidden;
 }
 
@@ -32,18 +32,12 @@ p {
   color: #2e31cc;
 }
 
-
-.mole {
-  height: 200px;
-  width: 200px;
-}
-
 .timer-class {
   font-size: 20px;
-  color: #e74c3c; /* Red color for the timer */
+  color: #e74c3c;
 }
 
-.text-container{
+.text-container {
   display: flex;
   margin-bottom: 20px;
   flex-direction: row;
@@ -59,15 +53,23 @@ p {
   padding: 10px;
   align-items: center;
 
-  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Slightly transparent white background */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Increased box shadow for depth */
-
 }
 
 button {
-  background: linear-gradient(to bottom, #2980b9, #3498db); /* Blue color for the button */
+  background: linear-gradient(
+    to bottom,
+    #2980b9,
+    #3498db
+  ); /* Blue color for the button */
   color: #fff;
   font-size: 18px;
   padding: 10px 20px;
@@ -79,5 +81,29 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(to bottom, #3498db, #2980b9); /* Darker gradient on hover */
+  background: linear-gradient(
+    to bottom,
+    #3498db,
+    #2980b9
+  ); /* Darker gradient on hover */
+}
+.mole {
+  /* ... existing styles ... */
+  height: 200px;
+  width: 200px;
+}
+
+.mole.clicked {
+  animation: whackAnimation 0.3s ease-in-out;
+}
+@keyframes whackAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

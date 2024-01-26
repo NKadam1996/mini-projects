@@ -24,18 +24,20 @@ export const Game = () => {
   }
 
   const handleWhack = (row, col) => {
-    if (moles[row][col].isVisible) {
-      whackAudio.play();
-      setScore((prevScore) => prevScore + config.positiveScore);
-      setMoles((prevMoles) => {
-        const updatedMoles = [...prevMoles];
-        updatedMoles[row][col].isVisible = false;
-        return updatedMoles;
-      });
-    } else {
-      // Mole not clicked, decrement the score
-      wrongWhackAudio.play();
-      setScore((prevScore) => prevScore - config.negativeScore);
+    if (gameStarted) {
+      if (moles[row][col].isVisible) {
+        whackAudio.play();
+        setScore((prevScore) => prevScore + config.positiveScore);
+        setMoles((prevMoles) => {
+          const updatedMoles = [...prevMoles];
+          updatedMoles[row][col].isVisible = false;
+          return updatedMoles;
+        });
+      } else {
+        // Mole not clicked, decrement the score
+        wrongWhackAudio.play();
+        setScore((prevScore) => prevScore - config.negativeScore);
+      }
     }
   };
 
@@ -62,7 +64,7 @@ export const Game = () => {
             return resetMoles;
           });
         }, 1000);
-      }, 300);
+      }, 500);
 
       // Clear the moleInterval when the timer reaches 0
       const timerInterval = setInterval(() => {
@@ -80,7 +82,7 @@ export const Game = () => {
     return () => {
       whackAudio.pause();
       whackAudio.currentTime = 0;
-      
+
       wrongWhackAudio.pause();
       wrongWhackAudio.currentTime = 0;
     };
