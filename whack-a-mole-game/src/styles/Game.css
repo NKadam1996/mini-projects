@@ -1,6 +1,11 @@
 body {
   font-family: "Arial", sans-serif;
   text-align: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: radial-gradient(#419c55 60%,#014e07);
+  overflow: hidden;
 }
 
 h1 {
@@ -21,10 +26,12 @@ p {
 }
 
 .score-class {
-  display: flex;
-  align-content: flex-start;
-  font-size: 30px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #2e31cc;
 }
+
 
 .mole {
   height: 200px;
@@ -32,15 +39,16 @@ p {
 }
 
 .timer-class {
-  display: flex;
-  align-content: flex-start;
-  font-size: 30px;
+  font-size: 20px;
+  color: #e74c3c; /* Red color for the timer */
 }
 
-.text-container {
-  align-items: center;
-  display: absolute;
-  flex-wrap: inherit;
+.text-container{
+  display: flex;
+  margin-bottom: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 10px;
 }
 
 .game-container {
@@ -50,4 +58,26 @@ p {
   transform: translate(-50%, -50%);
   padding: 10px;
   align-items: center;
+
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Increased box shadow for depth */
+
+}
+
+button {
+  background: linear-gradient(to bottom, #2980b9, #3498db); /* Blue color for the button */
+  color: #fff;
+  font-size: 18px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(to bottom, #3498db, #2980b9); /* Darker gradient on hover */
 }

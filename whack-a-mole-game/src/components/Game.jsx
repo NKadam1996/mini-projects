@@ -83,12 +83,12 @@ export const Game = () => {
 
   return (
     <div>
-      <div className="text-container">
-        <p className="score-class">Score: {score}</p>
-        <p className="timer-class">Time Left: {timer} seconds</p>
-      </div>
       <div className="game-container">
-        {!gameStarted && <button onClick={startGame}>Begin Game</button>}
+        <div className="text-container">
+          <p className="score-class">Score: {score}</p>
+          {!gameStarted && <button className="button-class" onClick={startGame}>Begin Game</button>}
+          <p className="timer-class">Time Left: <br/> {timer} seconds</p>
+        </div>
         <div className="grid-container">
           {moles.map((row, rowIndex) => (
             <div key={rowIndex} className="grid-row">
