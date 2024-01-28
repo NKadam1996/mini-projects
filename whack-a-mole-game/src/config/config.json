@@ -4,5 +4,8 @@
   "gameTimer": 30,
   "initialScore":0,
   "positiveScore":10,
-  "negativeScore":5
+  "negativeScore":5,
+  "bombFrequency":0.2,
+  "moleFrequency":400,
+  "clearInterval":1000  
 }

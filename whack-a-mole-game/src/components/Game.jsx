@@ -19,13 +19,14 @@ export const Game = () => {
       Array.from({ length: config.gridCol }, (_, col) => ({
         id: `${row}-${col}`,
         isVisible: false,
+        isBomb: false,
       }))
     );
   }
 
   const handleWhack = (row, col) => {
     if (gameStarted) {
-      if (moles[row][col].isVisible) {
+      if (moles[row][col].isVisible && !moles[row][col].isBomb) {
         whackAudio.play();
         setScore((prevScore) => prevScore + config.positiveScore);
         setMoles((prevMoles) => {
@@ -33,8 +34,7 @@ export const Game = () => {
           updatedMoles[row][col].isVisible = false;
           return updatedMoles;
         });
-      } else {
-        // Mole not clicked, decrement the score
+      } else if (moles[row][col].isBomb) {
         wrongWhackAudio.play();
         setScore((prevScore) => prevScore - config.negativeScore);
       }
@@ -54,22 +54,27 @@ export const Game = () => {
         setMoles((prevMoles) => {
           const updatedMoles = [...prevMoles];
           updatedMoles[randomRow][randomCol].isVisible = true;
+          var x = Math.random();
+          if (x < config.bombFrequency) {
+            console.log(x);
+            updatedMoles[randomRow][randomCol].isBomb = true;
+          }
           return updatedMoles;
         });
 
         setTimeout(() => {
           setMoles((prevMoles) => {
             const resetMoles = [...prevMoles];
-            resetMoles[randomRow][randomCol].isVisible = false;
+            resetMoles[randomRow][randomCol].isBomb = false; // Reset mole as not bomb
+            resetMoles[randomRow][randomCol].isVisible = false; // Hide bomb
             return resetMoles;
           });
-        }, 1000);
-      }, 500);
-
+        }, config.clearInterval);
+      }, config.moleFrequency);
       // Clear the moleInterval when the timer reaches 0
       const timerInterval = setInterval(() => {
         setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
-      }, 1000);
+      }, config.clearInterval);
 
       return () => {
         clearInterval(moleInterval);
@@ -121,6 +126,7 @@ export const Game = () => {
                   key={mole.id}
                   isVisible={mole.isVisible}
                   onWhack={() => handleWhack(rowIndex, colIndex)}
+                  isBomb={mole.isBomb}
                 />
               ))}
             </div>
